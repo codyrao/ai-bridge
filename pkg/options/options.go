@@ -3,8 +3,9 @@ package options
 import (
 	"time"
 
-	"github.com/cloudwego/eino/components/tool"
 	"ai-bridge/pkg/types"
+
+	"github.com/cloudwego/eino/components/tool"
 )
 
 // Option 配置选项函数类型
@@ -113,6 +114,38 @@ func WithProxy(proxy string) Option {
 func WithEnableLog(enable bool) Option {
 	return func(c *types.Config) {
 		c.EnableLog = enable
+	}
+}
+
+// WithSystemPrompt 设置系统提示词模板
+// 用于定义AI的角色和行为准则
+func WithSystemPrompt(prompt string) Option {
+	return func(c *types.Config) {
+		c.SystemPrompt = prompt
+	}
+}
+
+// WithSkills 设置要使用的 Agent Skills
+// skills 是 Skill 名称列表，如 ["calculator", "weather"]
+func WithSkills(skills ...string) Option {
+	return func(c *types.Config) {
+		c.Skills = append(c.Skills, skills...)
+	}
+}
+
+// WithSkillPaths 设置 Skill 文件夹路径
+// 可以指定多个包含 skill.md 的文件夹路径
+func WithSkillPaths(paths ...string) Option {
+	return func(c *types.Config) {
+		c.SkillPaths = append(c.SkillPaths, paths...)
+	}
+}
+
+// WithSkillDir 从目录加载所有 Skills
+// 目录下的每个子文件夹应该是一个 Skill
+func WithSkillDir(dir string) Option {
+	return func(c *types.Config) {
+		c.SkillPaths = append(c.SkillPaths, dir)
 	}
 }
 

@@ -48,6 +48,17 @@ type Config struct {
 
 	// EnableLog 是否启用日志
 	EnableLog bool
+
+	// SystemPrompt 系统提示词模板
+	// 用于设置AI的角色和行为准则
+	SystemPrompt string
+
+	// Skills Agent Skills 列表
+	// 参考: https://agentskills.io/specification
+	Skills []string
+
+	// SkillPaths Skill 文件夹路径列表
+	SkillPaths []string
 }
 
 // DefaultConfig 返回默认配置
